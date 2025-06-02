@@ -9,12 +9,24 @@ jobs:
   android:
     name: Android APK Build
     runs-on: ubuntu-latest
-    container: notfl3/cargo-apk
     steps:
       - uses: actions/checkout@v2
 
+      - name: Update
+        run: |
+          rustup update
+          cargo --version
+
+      - name: Install
+        run: cargo install cargo-quad-apk
+
+      - name: Version check
+        run: |
+          cargo --version
+          rustc --version
+
       - name: Native build
-        run: cargo build --release
+        run: cargo build
         
       - name: cargo quad-apk
         run: cargo quad-apk build --release
