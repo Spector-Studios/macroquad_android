@@ -12,6 +12,11 @@ jobs:
     container: notfl3/cargo-apk
     steps:
       - uses: actions/checkout@v2
+
+      - name: Re-add macroquad
+        run: |
+          cargo remove macroquad
+          cargo add macroquad
         
       - name: cargo quad-apk
         run: cargo quad-apk build --release
