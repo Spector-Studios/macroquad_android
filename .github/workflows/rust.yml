@@ -13,10 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Re-add macroquad
-        run: |
-          cargo remove macroquad
-          cargo add macroquad
+      - name: Native build
+        run: cargo build --release
         
       - name: cargo quad-apk
         run: cargo quad-apk build --release
