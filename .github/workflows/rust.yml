@@ -9,31 +9,42 @@ jobs:
   android:
     name: Android APK Build
     runs-on: ubuntu-latest
+    container: notfl3/cargo-apk
     steps:
       - uses: actions/checkout@v2
 
-      - name: Rust target install
+#      - name: Rust target install
+#        run: |
+#          rustup target add armv7-linux-androideabi
+#          rustup target add aarch64-linux-android
+#          rustup target add i686-linux-android
+#          rustup target add x86_64-linux-android
+
+#      - uses: nttld/setup-ndk@v1
+#        id: setup-ndk
+#        with:
+#         ndk-version: r25b
+#         add-to-path: true
+#         local-cache: true
+#         link-to-sdk: true
+
+#      - name: Install cargo-quad-apk
+#        uses: baptiste0928/cargo-install@v3.3.0
+#        with:
+#          crate: cargo-quad-apk
+#          git: https://github.com/not-fl3/cargo-quad-apk
+        #run: cargo install --git "https://github.com/not-fl3/cargo-quad-apk.git"
+
+      - name: Reinstall Rust
         run: |
+          rustup self uninstall
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           rustup target add armv7-linux-androideabi
           rustup target add aarch64-linux-android
           rustup target add i686-linux-android
           rustup target add x86_64-linux-android
-
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-         ndk-version: r25b
-         add-to-path: true
-         local-cache: true
-         link-to-sdk: true
-
-      - name: Install cargo-quad-apk
-        uses: baptiste0928/cargo-install@v3.3.0
-        with:
-          crate: cargo-quad-apk
-          git: https://github.com/not-fl3/cargo-quad-apk
-        #run: cargo install --git "https://github.com/not-fl3/cargo-quad-apk.git"
-
+          cargo install --git https://github.com/not-fl3/cargo-quad-apk.git
+        
       - name: Downgrade macroquad
         run: |
           cargo remove macroquad
@@ -43,8 +54,6 @@ jobs:
         run: cargo build
         
       - name: cargo quad-apk
-        env:
-          NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
           echo $NDK_HOME
           ls -l $NDK_HOME
