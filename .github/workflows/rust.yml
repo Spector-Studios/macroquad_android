@@ -10,22 +10,15 @@ jobs:
     name: Android APK Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2        
 
-      - name: Find NDK
-        run: |
-          ls -l ${ANDROID_HOME}
-          ls tmp_73i5
-        
-          
-
-#      - uses: nttld/setup-ndk@v1
-#        id: setup-ndk
-#        with:
-#         ndk-version: r25b
-#         add-to-path: true
-#         local-cache: true
-#         link-to-sdk: true
+      - uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+         ndk-version: r25b
+         add-to-path: true
+         local-cache: true
+         link-to-sdk: true
 
       - name: Install cargo-quad-apk
         uses: baptiste0928/cargo-install@v3.3.0
@@ -44,9 +37,10 @@ jobs:
         
       - name: cargo quad-apk
         env:
-          NDK_HOME: ${ANDROID_HOME}/ndk/27.2.12479018
+          NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
           echo $NDK_HOME
+          ls -l $NDK_HOME
           cargo quad-apk build --release
 
       - uses: actions/upload-artifact@v4
