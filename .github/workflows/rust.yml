@@ -34,11 +34,6 @@ jobs:
           git: https://github.com/not-fl3/cargo-quad-apk
         #run: cargo install --git "https://github.com/not-fl3/cargo-quad-apk.git"
 
-      - name: Downgrade macroquad
-        run: |
-          cargo remove macroquad
-          cargo add macroquad@0.4.13
-
       - name: Native build
         run: cargo build
         
