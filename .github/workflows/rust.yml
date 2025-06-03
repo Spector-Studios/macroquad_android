@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Update
+      - name: Install
         run: |
-          rustup update
+          cargo install cargo-quad-apk
           cargo --version
 
       - name: Downgrade macroquad
