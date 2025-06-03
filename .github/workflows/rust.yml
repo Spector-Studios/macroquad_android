@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Test NDK
+        run: |
+          ndk-build --help
+          which ndk-build
+
       - name: Install
         run: |
           cargo install cargo-quad-apk
