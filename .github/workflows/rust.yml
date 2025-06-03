@@ -38,7 +38,7 @@ jobs:
         
       - name: cargo quad-apk
         env:
-          NDK_HOME: $ANDROID_HOME/sdk/ndk
+          NDK_HOME: ${ANDROID_HOME}/ndk
         run: cargo quad-apk build --release
 
       - uses: actions/upload-artifact@v4
