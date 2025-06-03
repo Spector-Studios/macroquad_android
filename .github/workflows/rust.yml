@@ -12,15 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Test NDK
-        run: |
-          ndk-build --help
-          which ndk-build
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+         ndk-version: r21e
+         add-to-path: true
 
       - name: Install
-        run: |
-          cargo install cargo-quad-apk
-          cargo --version
+        run: cargo install https://github.com/not-fl3/cargo-quad-apk.git
 
       - name: Downgrade macroquad
         run: |
@@ -31,6 +31,8 @@ jobs:
         run: cargo build
         
       - name: cargo quad-apk
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }
         run: cargo quad-apk build --release
 
       - uses: actions/upload-artifact@v4
