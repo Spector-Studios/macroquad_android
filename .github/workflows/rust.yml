@@ -13,7 +13,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Find NDK
-        run: ls -l ${ANDROID_HOME}/sdk/
+        run: |
+          ls -l ${ANDROID_HOME}
+          ls tmp_73i5
+        
           
 
 #      - uses: nttld/setup-ndk@v1
