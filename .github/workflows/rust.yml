@@ -12,15 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup NDK
-        uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@v1
         id: setup-ndk
         with:
          ndk-version: r21e
          add-to-path: true
+         local-cache: true
 
       - name: Install
-        run: cargo install https://github.com/not-fl3/cargo-quad-apk.git
+        run: cargo install --git "https://github.com/not-fl3/cargo-quad-apk.git"
 
       - name: Downgrade macroquad
         run: |
