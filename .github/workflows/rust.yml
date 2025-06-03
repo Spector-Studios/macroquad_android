@@ -12,12 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-         ndk-version: r21e
-         add-to-path: true
-         local-cache: true
+      - name: Find NDK
+        run: |
+          ls -l ${ANDROID_HOME}
+          
+
+#      - uses: nttld/setup-ndk@v1
+#        id: setup-ndk
+#        with:
+#         ndk-version: r25b
+#         add-to-path: true
+#         local-cache: true
+#         link-to-sdk: true
 
       - name: Install
         run: cargo install --git "https://github.com/not-fl3/cargo-quad-apk.git"
@@ -32,7 +38,7 @@ jobs:
         
       - name: cargo quad-apk
         env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          NDK_HOME: $ANDROID_HOME/sdk/ndk
         run: cargo quad-apk build --release
 
       - uses: actions/upload-artifact@v4
