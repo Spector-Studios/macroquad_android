@@ -17,13 +17,10 @@ jobs:
           rustup update
           cargo --version
 
-      - name: Install
-        run: cargo install cargo-quad-apk
-
-      - name: Version check
+      - name: Downgrade macroquad
         run: |
-          cargo --version
-          rustc --version
+          cargo remove macroquad
+          cargo add macroquad@0.4.13
 
       - name: Native build
         run: cargo build
