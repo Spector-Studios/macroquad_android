@@ -3,7 +3,7 @@ name = "macroquad_android"
 version = "0.1.0"
 edition = "2024"
 
-[patches.crates-io]
+[patch.crates-io]
 miniquad = { git = 'https://github.com/Spector-Studios/miniquad.git' }
 
 [dependencies]
