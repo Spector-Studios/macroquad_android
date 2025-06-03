@@ -32,7 +32,7 @@ jobs:
         
       - name: cargo quad-apk
         env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: cargo quad-apk build --release
 
       - uses: actions/upload-artifact@v4
