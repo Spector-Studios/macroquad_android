@@ -12,6 +12,7 @@ macroquad = "0.4.14"
 [package.metadata.android]
 package_name = "dev.spectorstudios.macroquad_android"
 label = "Macro Test"
+assets = "assets/"
 
 [package.metadata.android.activity_attributes]
 "android:exported" = "true"
